@@ -11,6 +11,9 @@ import javax.swing.BoxLayout;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
@@ -69,6 +72,10 @@ public class application {
 		frame.getContentPane().add(btnNewButton_1, "cell 25 0");
 		
 		JButton btnNewButton = new JButton(">");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		frame.getContentPane().add(btnNewButton, "cell 26 0");
 		
 		textField_1 = new JTextField();
@@ -84,6 +91,8 @@ public class application {
 		JScrollPane scrollPane = new JScrollPane();
 		frame.getContentPane().add(scrollPane, "flowx,cell 0 1 1 9,grow");
 		
+		
+		
 		JList list = new JList();
 		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		list.setListData(getWords());
@@ -92,17 +101,29 @@ public class application {
 		JButton btnNewButton_3 = new JButton("Delete Word");
 		frame.getContentPane().add(btnNewButton_3, "cell 0 0");
 		
+		MouseListener mouseListener = new MouseAdapter() {
+		     public void mouseClicked(MouseEvent e) {
+		         if (e.getClickCount() == 1) {
+		             int index = list.locationToIndex(e.getPoint());
+		             Dictionary.getDefinitions(Dictionary.getNames().get(index));
+		          }
+		     }
+		 };
+		 list.addMouseListener(mouseListener);
+		
 	}
 	
 	public Vector getWords() {
 		Vector nameVector = new Vector();
 		ArrayList<String> names = Dictionary.getNames();
 		
-		for(int i = 0; i < names.size()-1; i++) {
+		for(int i = 0; i < names.size(); i++) {
 			nameVector.add(names.get(i));
 		}
 		
 		return nameVector;
 	}
-
+	
+	
 }
+

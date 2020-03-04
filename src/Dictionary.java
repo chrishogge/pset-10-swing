@@ -24,7 +24,7 @@ class Dictionary{
 		    List<Word> words = Arrays.asList(gson.fromJson(reader, Word[].class));
 		    
 		    ArrayList<String> names = new ArrayList<String>();
-		    for(int i = 0; i < words.size()-1; i++) {
+		    for(int i = 0; i < words.size(); i++) {
 		    	names.add(words.get(i).getName());
 		    }
 
@@ -52,13 +52,17 @@ class Dictionary{
 		    
 		    ArrayList<Definition> defs = new ArrayList<Definition>();
 		    
-		    for(int i = 0; i < words.size()-1;i++) {
+		    for(int i = 0; i < words.size();i++) {
 		    	if(words.get(i).getName().equals(name)) {
 		    		defs = (words.get(i).getDefinitions());
 		    	}
 		    }
 		    
-		    System.out.println(defs.toString());
+		   
+		    
+		    for(int j = 0; j < defs.size(); j++) {
+		    	System.out.println(defs.get(j).getDefinition());
+		    }
 		    
 		    
 			
