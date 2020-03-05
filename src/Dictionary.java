@@ -80,23 +80,19 @@ class Dictionary{
 		String adjectiveDefinitions = "Adjective: \n";
 		
 		for(int i = 0; i < defs.size(); i++) {
-			
-			System.out.println(defs.get(i).getPartOfSpeech());
-			
+						
 			if(defs.get(i).getPartOfSpeech().equals("noun")) {
-				System.out.println("true");
 				
-				nounDefinitions += "\t" + defs.get(i).getDefinition() + "\n";
+				nounDefinitions += "\t- " + defs.get(i).getDefinition() + "\n";
 				
 			}else if(defs.get(i).getPartOfSpeech().equals("verb")) {
-				System.out.println("true");
 				
-				verbDefinitions += "\t" + defs.get(i).getDefinition() + "\n";
+				verbDefinitions += "\t- " + defs.get(i).getDefinition() + "\n";
 				
 			}else if(defs.get(i).getPartOfSpeech().equals("adjective")) {
-				System.out.println("true");
 				
-				adjectiveDefinitions += "\t" + defs.get(i).getDefinition() + "\n";
+				adjectiveDefinitions += "\t- " + defs.get(i).getDefinition() + "\n";
+			
 			}
 		}
 		
