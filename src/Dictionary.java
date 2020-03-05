@@ -78,20 +78,28 @@ class Dictionary{
 		String nounDefinitions = "Noun: \n";
 		String verbDefinitions = "Verb: \n";
 		String adjectiveDefinitions = "Adjective: \n";
+		String nullDefinitions = "Uncategorized: \n";
 		
 		for(int i = 0; i < defs.size(); i++) {
-						
-			if(defs.get(i).getPartOfSpeech().equals("noun")) {
+			
+			if(defs.get(i).getPartOfSpeech() != null) {
+			
+				if(defs.get(i).getPartOfSpeech().equals("noun")) {
+					
+					nounDefinitions += "\t- " + defs.get(i).getDefinition() + "\n";
+					
+				}else if(defs.get(i).getPartOfSpeech().equals("verb")) {
+					
+					verbDefinitions += "\t- " + defs.get(i).getDefinition() + "\n";
+					
+				}else if(defs.get(i).getPartOfSpeech().equals("adjective")) {
+					
+					adjectiveDefinitions += "\t- " + defs.get(i).getDefinition() + "\n";
 				
-				nounDefinitions += "\t- " + defs.get(i).getDefinition() + "\n";
+				}
+			}else if(defs.get(i).getPartOfSpeech() == null) {
 				
-			}else if(defs.get(i).getPartOfSpeech().equals("verb")) {
-				
-				verbDefinitions += "\t- " + defs.get(i).getDefinition() + "\n";
-				
-			}else if(defs.get(i).getPartOfSpeech().equals("adjective")) {
-				
-				adjectiveDefinitions += "\t- " + defs.get(i).getDefinition() + "\n";
+				nullDefinitions += "\t- " + defs.get(i).getDefinition() + "\n";
 			
 			}
 		}
@@ -120,7 +128,23 @@ class Dictionary{
 			}
 		}
 		
+		if(!(nullDefinitions.equals("Uncategorized: \n"))) {
+			if(formattedDefinitions.length() != 0) {
+				formattedDefinitions += "\n" + nullDefinitions;
+			}else if(formattedDefinitions.length() == 0) {
+				formattedDefinitions += nullDefinitions;
+			}
+		}
+		
 		return formattedDefinitions;
+	}
+	
+	public static String getFormattedWordDefinitions(int index) {
+		
+		String formattedDefinitions = formatDefinitions(getDefinitions(getNames().get(index)));
+		
+		return formattedDefinitions;
+		
 	}
 	
 }

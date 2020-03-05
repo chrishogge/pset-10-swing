@@ -122,8 +122,7 @@ public class application {
 		         if (e.getClickCount() == 1) {
 		             int index = list.locationToIndex(e.getPoint());
 		             
-		             textPane.setText(Dictionary.formatDefinitions(Dictionary.getDefinitions(Dictionary.getNames().get(index))));
-		             
+		             textPane.setText(Dictionary.getFormattedWordDefinitions(index));
 		             
 		          }
 		     }
