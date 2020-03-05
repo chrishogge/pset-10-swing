@@ -41,7 +41,7 @@ class Dictionary{
 		
 	}
 	
-	public static void getDefinitions(String name) {
+	public static ArrayList<Definition> getDefinitions(String name) {
 
 	    Reader reader;
 	    
@@ -60,20 +60,71 @@ class Dictionary{
 		    
 		   
 		    
-		    for(int j = 0; j < defs.size(); j++) {
-		    	System.out.println(defs.get(j).getDefinition());
-		    }
+		    return defs;
 		    
 		    
-			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 
+	    return null;
 	    
-	    
+	}
+	
+	public static String formatDefinitions(ArrayList<Definition> defs) {
+		String formattedDefinitions = "";
+		String nounDefinitions = "Noun: \n";
+		String verbDefinitions = "Verb: \n";
+		String adjectiveDefinitions = "Adjective: \n";
+		
+		for(int i = 0; i < defs.size(); i++) {
+			
+			System.out.println(defs.get(i).getPartOfSpeech());
+			
+			if(defs.get(i).getPartOfSpeech().equals("noun")) {
+				System.out.println("true");
+				
+				nounDefinitions += "\t" + defs.get(i).getDefinition() + "\n";
+				
+			}else if(defs.get(i).getPartOfSpeech().equals("verb")) {
+				System.out.println("true");
+				
+				verbDefinitions += "\t" + defs.get(i).getDefinition() + "\n";
+				
+			}else if(defs.get(i).getPartOfSpeech().equals("adjective")) {
+				System.out.println("true");
+				
+				adjectiveDefinitions += "\t" + defs.get(i).getDefinition() + "\n";
+			}
+		}
+		
+		if(!(nounDefinitions.equals("Noun: \n"))) {
+			if(formattedDefinitions.length() != 0) {
+				formattedDefinitions += "\n" + nounDefinitions;
+			}else if(formattedDefinitions.length() == 0) {
+				formattedDefinitions += nounDefinitions;
+			}
+		}
+		
+		if(!(verbDefinitions.equals("Verb: \n"))) {
+			if(formattedDefinitions.length() != 0) {
+				formattedDefinitions += "\n" + verbDefinitions;
+			}else if(formattedDefinitions.length() == 0) {
+				formattedDefinitions += verbDefinitions;
+			}
+		}
+		
+		if(!(adjectiveDefinitions.equals("Adjective: \n"))) {
+			if(formattedDefinitions.length() != 0) {
+				formattedDefinitions += "\n" + adjectiveDefinitions;
+			}else if(formattedDefinitions.length() == 0) {
+				formattedDefinitions += adjectiveDefinitions;
+			}
+		}
+		
+		return formattedDefinitions;
 	}
 	
 }
