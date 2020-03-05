@@ -105,35 +105,27 @@ class Dictionary{
 		}
 		
 		if(!(nounDefinitions.equals("Noun: \n"))) {
-			if(formattedDefinitions.length() != 0) {
+			
 				formattedDefinitions += "\n" + nounDefinitions;
-			}else if(formattedDefinitions.length() == 0) {
-				formattedDefinitions += nounDefinitions;
-			}
+		
 		}
 		
 		if(!(verbDefinitions.equals("Verb: \n"))) {
-			if(formattedDefinitions.length() != 0) {
-				formattedDefinitions += "\n" + verbDefinitions;
-			}else if(formattedDefinitions.length() == 0) {
-				formattedDefinitions += verbDefinitions;
-			}
+			
+			formattedDefinitions += "\n" + verbDefinitions;
+		
 		}
 		
 		if(!(adjectiveDefinitions.equals("Adjective: \n"))) {
-			if(formattedDefinitions.length() != 0) {
-				formattedDefinitions += "\n" + adjectiveDefinitions;
-			}else if(formattedDefinitions.length() == 0) {
-				formattedDefinitions += adjectiveDefinitions;
-			}
+			
+			formattedDefinitions += "\n" + adjectiveDefinitions;
+			
 		}
 		
 		if(!(nullDefinitions.equals("Uncategorized: \n"))) {
-			if(formattedDefinitions.length() != 0) {
-				formattedDefinitions += "\n" + nullDefinitions;
-			}else if(formattedDefinitions.length() == 0) {
-				formattedDefinitions += nullDefinitions;
-			}
+
+			formattedDefinitions += "\n" + nullDefinitions;
+		
 		}
 		
 		return formattedDefinitions;

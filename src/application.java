@@ -122,7 +122,15 @@ public class application {
 		         if (e.getClickCount() == 1) {
 		             int index = list.locationToIndex(e.getPoint());
 		             
-		             textPane.setText(Dictionary.getFormattedWordDefinitions(index));
+		             String displayWord = Dictionary.getNames().get(index);
+		             String temp = displayWord.substring(0,1).toUpperCase();
+		             displayWord = temp + displayWord.substring(1);
+		             
+		             String displayDefs = Dictionary.getFormattedWordDefinitions(index);
+		             
+		             String displayedText = displayWord + "\n" + displayDefs;
+		             
+		             textPane.setText(displayedText);
 		             
 		          }
 		     }
