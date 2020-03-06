@@ -14,6 +14,29 @@ import java.nio.file.Paths;
 
 class Dictionary{
 	
+	public static ArrayList<Word> getWords(){
+		try {
+			
+			Gson gson = new Gson();
+			
+		    Reader reader = Files.newBufferedReader(Paths.get("src/words.json"));
+
+		    List<Word> words = Arrays.asList(gson.fromJson(reader, Word[].class));
+
+		    ArrayList<Word> wordsAL = new ArrayList<Word>(words);
+		    
+		    // close reader
+		    reader.close();
+		    
+		    return wordsAL;
+		    
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
 	public static ArrayList<String> getNames() {
 		try {
 			
@@ -137,6 +160,32 @@ class Dictionary{
 		
 		return formattedDefinitions;
 		
+	}
+	
+	public static void editJson(ArrayList<Word> words) {
+		try {
+			
+			Gson gson = new Gson();
+			
+		    Reader reader = Files.newBufferedReader(Paths.get("src/words.json"));
+		    
+		    String wordsJson = gson.toJson(words);
+		    
+		    FileWriter fileWriter = new FileWriter("src/words.json");
+		    
+		    fileWriter.write(wordsJson);
+		    fileWriter.close();
+
+		    // close reader
+		    reader.close();
+		    
+		   
+		    
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
 	}
 	
 }

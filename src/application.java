@@ -7,8 +7,10 @@ import javax.swing.UIManager;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.AbstractButton;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
+import javax.swing.DefaultListModel;
 
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
@@ -17,6 +19,9 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
@@ -67,7 +72,6 @@ public class application {
 		frame.getContentPane().setLayout(new MigLayout("", "[grow][][][][][][][][][][][][][][][][][][][][][][grow][][][][][grow]", "[][][][][][][][][][][grow]"));
 		frame.setTitle("Problem Set 10 - E-Dictionary");
 		
-		
 		JButton btnNewButton_2 = new JButton("Add Word");
 		frame.getContentPane().add(btnNewButton_2, "flowx,cell 0 0");
 		
@@ -77,6 +81,7 @@ public class application {
 		JButton btnNewButton = new JButton(">");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 			}
 		});
 		frame.getContentPane().add(btnNewButton, "cell 26 0");
@@ -86,8 +91,52 @@ public class application {
 		frame.getContentPane().add(textField_1, "cell 27 0,alignx center,aligny center");
 		textField_1.setColumns(10);
 		
+		
+		
+		JScrollPane scrollPane = new JScrollPane();
+		frame.getContentPane().add(scrollPane, "flowx,cell 0 2 1 9,grow");
+		
+		JList list = new JList();
+		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		DefaultListModel x = new DefaultListModel();
+		 ArrayList<Word> sortedWords = sortWordsAZ(Dictionary.getWords());
+		Dictionary.editJson(sortedWords);
+		x.addAll(getWords());
+		list.setModel(x);
+		scrollPane.setViewportView(list);
+		
+		
+		
 		JLabel lblSort = new JLabel("Sort:");
 		frame.getContentPane().add(lblSort, "flowx,cell 0 1");
+		
+		ActionListener azActionListener = new ActionListener() {
+		      public void actionPerformed(ActionEvent actionEvent) {
+		        AbstractButton aButton = (AbstractButton) actionEvent.getSource();
+		        
+		        ArrayList<Word> sortedWords = sortWordsAZ(Dictionary.getWords());
+				Dictionary.editJson(sortedWords);
+				Vector wordVector = getWords();
+				DefaultListModel tempModel = new DefaultListModel();
+				tempModel.addAll(wordVector);
+				list.setModel(tempModel);
+				
+		      }
+		    };
+		    
+		    ActionListener zaActionListener = new ActionListener() {
+			      public void actionPerformed(ActionEvent actionEvent) {
+			        AbstractButton aButton = (AbstractButton) actionEvent.getSource();
+			        
+			        ArrayList<Word> sortedWords = sortWordsZA(Dictionary.getWords());
+					Dictionary.editJson(sortedWords);
+					Vector wordVector = getWords();
+					DefaultListModel tempModel = new DefaultListModel();
+					tempModel.addAll(wordVector);
+					list.setModel(tempModel);
+					
+			      }
+			    };
 		
 		JRadioButton rdbtnAz = new JRadioButton("A-Z", true);
 		frame.getContentPane().add(rdbtnAz, "cell 0 1");
@@ -96,16 +145,6 @@ public class application {
 		textPane.setEditable(false);
 		frame.getContentPane().add(textPane, "cell 2 2 26 9,grow");
 		textPane.setText("Welcome to the dictionary!");
-		
-		JScrollPane scrollPane = new JScrollPane();
-		frame.getContentPane().add(scrollPane, "flowx,cell 0 2 1 9,grow");
-		
-		
-		
-		JList list = new JList();
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		list.setListData(getWords());
-		scrollPane.setViewportView(list);
 		
 		JButton btnNewButton_3 = new JButton("Delete Word");
 		frame.getContentPane().add(btnNewButton_3, "cell 0 0");
@@ -116,6 +155,9 @@ public class application {
 		ButtonGroup radioButtons = new ButtonGroup();
 		radioButtons.add(rdbtnAz);
 		radioButtons.add(rdbtnZa);
+		
+		rdbtnAz.addActionListener(azActionListener);
+		rdbtnZa.addActionListener(zaActionListener);
 		
 		MouseListener mouseListener = new MouseAdapter() {
 		     public void mouseClicked(MouseEvent e) {
@@ -148,6 +190,40 @@ public class application {
 		}
 		
 		return nameVector;
+	}
+	
+	public ArrayList<Word> sortWordsZA(ArrayList<Word> words){
+		
+		List<Word> tempList = words;
+		
+		Collections.sort(words, new Comparator<Word>() {
+	        @Override
+	        public int compare(Word word2, Word word1)
+	        {
+
+	            return  word1.word.compareTo(word2.word);
+	        }
+	    });
+		
+		ArrayList<Word> tempArrayList = new ArrayList<Word>(tempList);
+		
+		return tempArrayList;
+		
+	}
+	
+	public ArrayList<Word> sortWordsAZ(ArrayList<Word> words){
+		
+		ArrayList<Word> sortedWords = sortWordsZA(words);
+		ArrayList<Word> sortedWordsZA = new ArrayList<Word>();
+			
+		for(int i = sortedWords.size()-1; i > -1; i--) {
+
+			sortedWordsZA.add(sortedWords.get(i));
+			
+		}
+		
+		return sortedWordsZA;
+		
 	}
 	
 }
