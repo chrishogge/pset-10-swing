@@ -75,20 +75,9 @@ public class application {
 		JButton btnNewButton_2 = new JButton("Add Word");
 		frame.getContentPane().add(btnNewButton_2, "flowx,cell 0 0");
 		
-		JButton btnNewButton_1 = new JButton("<");
-		frame.getContentPane().add(btnNewButton_1, "cell 25 0");
-		
-		JButton btnNewButton = new JButton(">");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-			}
-		});
-		frame.getContentPane().add(btnNewButton, "cell 26 0");
-		
 		textField_1 = new JTextField();
 		textField_1.setToolTipText("Enter Word to Search");
-		frame.getContentPane().add(textField_1, "cell 27 0,alignx center,aligny center");
+		frame.getContentPane().add(textField_1, "cell 23 0 5 1,alignx center,aligny center");
 		textField_1.setColumns(10);
 		
 		
