@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import javax.swing.SpringLayout;
 import javax.swing.JScrollPane;
@@ -22,6 +23,7 @@ import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JComboBox;
+import java.awt.TextComponent;
 
 public class wordEditor {
 
@@ -91,9 +93,27 @@ public class wordEditor {
 		textField_7 = new JTextField();
 		panel.add(textField_7, "cell 0 0 6 1");
 		textField_7.setColumns(10);
+		textField_7.setName("textField");
 		
 		JComboBox comboBox = new JComboBox();
 		panel.add(comboBox, "cell 0 1 5 1");
+		
+		JButton button_2 = new JButton("=");
+		button_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				List<Component> comps = getAllComponents(frame);
+				for(i = 0; i < comps.size(); i++){
+					if(comps.get(i).getName() != null) {
+						if(comps.get(i).getName().equals("textField")) {
+							JTextField temp = (JTextField) comps.get(i);
+							System.out.print(temp.getText());
+						}
+					}
+				}
+			}
+		});
+		frame.getContentPane().add(button_2, "cell 0 0");
 		
 		
 	
@@ -108,8 +128,20 @@ public class wordEditor {
 		textField_7 = new JTextField();
 		panel.add(textField_7, "cell 0 0 6 1");
 		textField_7.setColumns(10);
+		textField_7.setName("textField");
 		
 		JComboBox comboBox = new JComboBox();
 		panel.add(comboBox, "cell 0 1 5 1");
+	}
+	
+	public static List<Component> getAllComponents(final Container c) {
+	    Component[] comps = c.getComponents();
+	    List<Component> compList = new ArrayList<Component>();
+	    for (Component comp : comps) {
+	        compList.add(comp);
+	        if (comp instanceof Container)
+	            compList.addAll(getAllComponents((Container) comp));
+	    }
+	    return compList;
 	}
 }
