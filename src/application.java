@@ -86,7 +86,6 @@ public class application {
 		frame.getContentPane().add(scrollPane, "flowx,cell 0 2 1 9,grow");
 		
 		JList list = new JList();
-		list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		DefaultListModel x = new DefaultListModel();
 		 ArrayList<Word> sortedWords = sortWordsAZ(Dictionary.getWords());
 		Dictionary.editJson(sortedWords);
@@ -159,7 +158,11 @@ public class application {
 		             
 		             String displayDefs = Dictionary.getFormattedWordDefinitions(index);
 		             
-		             String displayedText = displayWord + "\n" + displayDefs;
+		             String displaySyns = Dictionary.getFormattedSyns(index);
+		             
+		             String displayAnts = Dictionary.getFormattedAnts(index);
+		             
+		             String displayedText = displayWord + "\n" + displayDefs + "\n" + displaySyns + "\n" + displayAnts;
 		             
 		             textPane.setText(displayedText);
 		             

@@ -188,4 +188,96 @@ class Dictionary{
 		}
 	}
 	
+	public static ArrayList<String> getSyn(String name) {
+
+		    Reader reader;
+		    
+			try {
+				Gson gson = new Gson();
+				reader = Files.newBufferedReader(Paths.get("src/words.json"));
+			    List<Word> words = Arrays.asList(gson.fromJson(reader, Word[].class));
+			    
+			    ArrayList<String> synonyms = new ArrayList<String>();
+			    
+			    for(int i = 0; i < words.size();i++) {
+			    	if(words.get(i).getName().equals(name)) {
+			    		synonyms = (words.get(i).getSynonyms());
+			    	}
+			    }
+			    
+			   
+			    
+			    return synonyms;
+			    
+			    
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+
+		    return null;
+		
+		
+	}
+	
+	public static String getFormattedSyns(int index) {
+		
+		ArrayList<String> syns = getSyn(getWords().get(index).getName());
+		String formattedSyns = "Synonyms: ";
+		
+		for(int i = 0; i < syns.size(); i++) {
+			formattedSyns += "\n\t- " + syns.get(i);
+		}
+		
+		return formattedSyns;
+		
+	}
+	
+	public static ArrayList<String> getAnt(String name) {
+
+	    Reader reader;
+	    
+		try {
+			Gson gson = new Gson();
+			reader = Files.newBufferedReader(Paths.get("src/words.json"));
+		    List<Word> words = Arrays.asList(gson.fromJson(reader, Word[].class));
+		    
+		    ArrayList<String> synonyms = new ArrayList<String>();
+		    
+		    for(int i = 0; i < words.size();i++) {
+		    	if(words.get(i).getName().equals(name)) {
+		    		synonyms = (words.get(i).getAntonyms());
+		    	}
+		    }
+		    
+		   
+		    
+		    return synonyms;
+		    
+		    
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+
+	    return null;
+	
+	
+}
+
+public static String getFormattedAnts(int index) {
+	
+	ArrayList<String> syns = getSyn(getWords().get(index).getName());
+	String formattedSyns = "Antonyms: ";
+	
+	for(int i = 0; i < syns.size(); i++) {
+		formattedSyns += "\n\t- " + syns.get(i);
+	}
+	
+	return formattedSyns;
+	
+}
+	
 }
