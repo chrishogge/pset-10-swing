@@ -14,6 +14,7 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Vector;
 
 import javax.swing.SpringLayout;
 import javax.swing.JScrollPane;
@@ -24,6 +25,7 @@ import com.jgoodies.forms.layout.RowSpec;
 import com.jgoodies.forms.layout.FormSpecs;
 import javax.swing.JComboBox;
 import java.awt.TextComponent;
+import javax.swing.Box;
 
 public class wordEditor {
 
@@ -36,8 +38,12 @@ public class wordEditor {
 	private JButton button;
 	private JTextField textField_5;
 	private JTextField textField_6;
-	int i = 2;
+	int i = 5;
 	private JTextField textField_7;
+	String[] comboOptions = {"Noun","Verb","Adjective","Uncategorized"};
+	private JTextField textField_8;
+	private JTextField txtWordWordWord;
+	private JTextField textField_9;
 	
 	/**
 	 * Launch the application.
@@ -70,10 +76,35 @@ public class wordEditor {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Word Editor");
-		frame.getContentPane().setLayout(new MigLayout("", "[grow][][][][]", "[][][][grow]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[grow][][][][][]", "[][][][][95.00,grow][][]"));
 		
-		JLabel lblDefinitions = new JLabel("Definitions");
-		frame.getContentPane().add(lblDefinitions, "flowx,cell 0 0");
+		JLabel lblWord = new JLabel("Word:");
+		frame.getContentPane().add(lblWord, "flowx,cell 0 0");
+		
+		JButton btnNewButton = new JButton("Create Word");
+		frame.getContentPane().add(btnNewButton, "cell 4 0");
+		
+		JLabel lblSynonyms = new JLabel("Synonyms:");
+		frame.getContentPane().add(lblSynonyms, "flowx,cell 0 1");
+		
+		JLabel lblAntonyms = new JLabel("Antonyms:");
+		frame.getContentPane().add(lblAntonyms, "flowx,cell 0 2");
+		
+		JLabel lblDefinitions = new JLabel("Definitions:");
+		frame.getContentPane().add(lblDefinitions, "flowx,cell 0 3");
+		
+		JPanel panel = new JPanel();
+		frame.getContentPane().add(panel, "cell 0 4,grow");
+		panel.setLayout(new MigLayout("", "[][][][][][]", "[][]"));
+		
+		textField_7 = new JTextField();
+		panel.add(textField_7, "cell 0 0 6 1");
+		textField_7.setColumns(10);
+		textField_7.setName("textField");
+		
+		JComboBox comboBox = new JComboBox(comboOptions);
+		comboBox.setName("comboBox");
+		panel.add(comboBox, "cell 0 1 5 1");
 		
 		JButton button_1 = new JButton("+");
 		button_1.addMouseListener(new MouseAdapter() {
@@ -84,19 +115,19 @@ public class wordEditor {
 				frame.validate();
 			}
 		});
-		frame.getContentPane().add(button_1, "cell 0 0");
+		frame.getContentPane().add(button_1, "cell 0 3");
 		
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, "cell 0 1,grow");
-		panel.setLayout(new MigLayout("", "[][][][][][]", "[][]"));
+		textField_8 = new JTextField();
+		frame.getContentPane().add(textField_8, "cell 0 0");
+		textField_8.setColumns(10);
 		
-		textField_7 = new JTextField();
-		panel.add(textField_7, "cell 0 0 6 1");
-		textField_7.setColumns(10);
-		textField_7.setName("textField");
+		txtWordWordWord = new JTextField();
+		frame.getContentPane().add(txtWordWordWord, "cell 0 1");
+		txtWordWordWord.setColumns(10);
 		
-		JComboBox comboBox = new JComboBox();
-		panel.add(comboBox, "cell 0 1 5 1");
+		textField_9 = new JTextField();
+		frame.getContentPane().add(textField_9, "cell 0 2");
+		textField_9.setColumns(10);
 		
 		JButton button_2 = new JButton("=");
 		button_2.addMouseListener(new MouseAdapter() {
@@ -130,7 +161,8 @@ public class wordEditor {
 		textField_7.setColumns(10);
 		textField_7.setName("textField");
 		
-		JComboBox comboBox = new JComboBox();
+		JComboBox comboBox = new JComboBox(comboOptions);
+		comboBox.setName("comboBox");
 		panel.add(comboBox, "cell 0 1 5 1");
 	}
 	
