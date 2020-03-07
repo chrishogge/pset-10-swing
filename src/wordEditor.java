@@ -76,7 +76,7 @@ public class wordEditor {
 		frame.setBounds(100, 100, 450, 300);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setTitle("Word Editor");
-		frame.getContentPane().setLayout(new MigLayout("", "[grow][][][][][]", "[][][][][95.00,grow][][]"));
+		frame.getContentPane().setLayout(new MigLayout("", "[grow][][][][][]", "[][][][][95.00,grow][grow][]"));
 		
 		JLabel lblWord = new JLabel("Word:");
 		frame.getContentPane().add(lblWord, "flowx,cell 0 0");
@@ -93,8 +93,25 @@ public class wordEditor {
 		JLabel lblDefinitions = new JLabel("Definitions:");
 		frame.getContentPane().add(lblDefinitions, "flowx,cell 0 3");
 		
+		
+		
+		textField_8 = new JTextField();
+		frame.getContentPane().add(textField_8, "cell 0 0");
+		textField_8.setColumns(10);
+		
+		txtWordWordWord = new JTextField();
+		frame.getContentPane().add(txtWordWordWord, "cell 0 1");
+		txtWordWordWord.setColumns(10);
+		
+		textField_9 = new JTextField();
+		frame.getContentPane().add(textField_9, "cell 0 2");
+		textField_9.setColumns(10);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		frame.getContentPane().add(scrollPane, "cell 0 4,grow");
+		
 		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, "cell 0 4,grow");
+		scrollPane.setViewportView(panel);
 		panel.setLayout(new MigLayout("", "[][][][][][]", "[][]"));
 		
 		textField_7 = new JTextField();
@@ -110,60 +127,33 @@ public class wordEditor {
 		button_1.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				createDefs(frame, i);
-				i++;
+				createDefs(frame, i, panel);
+				i += 2;
 				frame.validate();
 			}
 		});
 		frame.getContentPane().add(button_1, "cell 0 3");
 		
-		textField_8 = new JTextField();
-		frame.getContentPane().add(textField_8, "cell 0 0");
-		textField_8.setColumns(10);
-		
-		txtWordWordWord = new JTextField();
-		frame.getContentPane().add(txtWordWordWord, "cell 0 1");
-		txtWordWordWord.setColumns(10);
-		
-		textField_9 = new JTextField();
-		frame.getContentPane().add(textField_9, "cell 0 2");
-		textField_9.setColumns(10);
-		
-		JButton button_2 = new JButton("=");
-		button_2.addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				List<Component> comps = getAllComponents(frame);
-				for(i = 0; i < comps.size(); i++){
-					if(comps.get(i).getName() != null) {
-						if(comps.get(i).getName().equals("textField")) {
-							JTextField temp = (JTextField) comps.get(i);
-							System.out.print(temp.getText());
-						}
-					}
-				}
-			}
-		});
-		frame.getContentPane().add(button_2, "cell 0 0");
-		
-		
-	
-		
 	}
 	
-	public void createDefs(JFrame frame, int i) {
-		JPanel panel = new JPanel();
-		frame.getContentPane().add(panel, "cell 0 " + Integer.toString(i) + ",grow");
-		panel.setLayout(new MigLayout("", "[][][][][][]", "[][]"));
+	public void createDefs(JFrame frame, int i, JPanel panel) {
+//		JPanel panel = new JPanel();
+//		scrollPane.add(scrollPane, "cell 0 " + Integer.toString(i) + ",grow");
+//		panel.setLayout(new MigLayout("", "[][][][][][]", "[][]"));
 		
 		textField_7 = new JTextField();
-		panel.add(textField_7, "cell 0 0 6 1");
+		panel.add(textField_7
+				, "cell 0 " + Integer.toString(i)
+				);
 		textField_7.setColumns(10);
 		textField_7.setName("textField");
 		
 		JComboBox comboBox = new JComboBox(comboOptions);
 		comboBox.setName("comboBox");
-		panel.add(comboBox, "cell 0 1 5 1");
+		panel.add(comboBox
+				, "cell 0 " + Integer.toString(i+1) 
+				+  " 5 1"
+				);
 	}
 	
 	public static List<Component> getAllComponents(final Container c) {
