@@ -171,6 +171,8 @@ class Dictionary{
 		    
 		    String wordsJson = gson.toJson(words);
 		    
+		    System.out.println(wordsJson);
+		    
 		    FileWriter fileWriter = new FileWriter("src/words.json");
 		    
 		    fileWriter.write(wordsJson);
@@ -269,14 +271,14 @@ class Dictionary{
 
 public static String getFormattedAnts(int index) {
 	
-	ArrayList<String> syns = getSyn(getWords().get(index).getName());
-	String formattedSyns = "Antonyms: ";
+	ArrayList<String> ants = getAnt(getWords().get(index).getName());
+	String formattedAnts = "Antonyms: ";
 	
-	for(int i = 0; i < syns.size(); i++) {
-		formattedSyns += "\n\t- " + syns.get(i);
+	for(int i = 0; i < ants.size(); i++) {
+		formattedAnts += "\n\t- " + ants.get(i);
 	}
 	
-	return formattedSyns;
+	return formattedAnts;
 	
 }
 	

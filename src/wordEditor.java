@@ -41,7 +41,7 @@ public class wordEditor {
 	private JTextField textField_6;
 	int i = 5;
 	private JTextField textField_7;
-	String[] comboOptions = {"Noun","Verb","Adjective","Uncategorized"};
+	String[] comboOptions = {"noun","verb","adjective","uncategorized"};
 	private JTextField textField_8;
 	private JTextField txtWordWordWord;
 	private JTextField textField_9;
@@ -49,7 +49,7 @@ public class wordEditor {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void editorMain() {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -196,8 +196,6 @@ public class wordEditor {
 			}
 		}
 		
-		System.out.println(textFields);
-		
 		for(i = 0; i < comps.size(); i++){
 			if(comps.get(i).getName() != null) {
 				if(comps.get(i).getName().equals("comboBox")) {
@@ -224,25 +222,24 @@ public class wordEditor {
 		String word = fullWord.get(0);
 		String[] syns = textFields.get(1).split(", ");
 		ArrayList<String> synsArray = new ArrayList<String>();
-		for(int i = 0; i < syns.length-1; i++) {
+		for(int i = 0; i < syns.length; i++) {
 			synsArray.add(syns[i]);
 		}
 		
 		String[] ants = textFields.get(2).split(", ");
 		ArrayList<String> antsArray = new ArrayList<String>();
-		for(int i = 0; i < syns.length-1; i++) {
+		for(int i = 0; i < ants.length; i++) {
 			antsArray.add(ants[i]);
 		}
-		
-		System.out.println(Arrays.deepToString(syns));
-		System.out.println(Arrays.deepToString(ants));
 		
 		Word newWord = new Word(fullWord.get(0),defs,synsArray,antsArray);
 		
 		words.add(newWord);
-		
+
 		Dictionary.editJson(words);
+		application.reloadWords(words);
 		
-		
+		frame.setVisible(false);
+		frame.dispose();
 	}
 }

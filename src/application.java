@@ -38,6 +38,8 @@ public class application {
 	private JFrame frame;
 	private JTextField textField;
 	private JTextField textField_1;
+	private static JList list;
+	private static JRadioButton rdbtnAz;
 
 	/**
 	 * Launch the application.
@@ -73,6 +75,12 @@ public class application {
 		frame.setTitle("Problem Set 10 - E-Dictionary");
 		
 		JButton btnNewButton_2 = new JButton("Add Word");
+		btnNewButton_2.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				wordEditor.editorMain();
+			}
+		});
 		frame.getContentPane().add(btnNewButton_2, "flowx,cell 0 0");
 		
 		textField_1 = new JTextField();
@@ -85,9 +93,9 @@ public class application {
 		JScrollPane scrollPane = new JScrollPane();
 		frame.getContentPane().add(scrollPane, "flowx,cell 0 2 1 9,grow");
 		
-		JList list = new JList();
+		list = new JList();
 		DefaultListModel x = new DefaultListModel();
-		 ArrayList<Word> sortedWords = sortWordsAZ(Dictionary.getWords());
+		ArrayList<Word> sortedWords = sortWordsAZ(Dictionary.getWords());
 		Dictionary.editJson(sortedWords);
 		x.addAll(getWords());
 		list.setModel(x);
@@ -126,7 +134,7 @@ public class application {
 			      }
 			    };
 		
-		JRadioButton rdbtnAz = new JRadioButton("A-Z", true);
+		rdbtnAz = new JRadioButton("A-Z", true);
 		frame.getContentPane().add(rdbtnAz, "cell 0 1");
 		
 		JTextPane textPane = new JTextPane();
@@ -173,7 +181,7 @@ public class application {
 		
 	}
 	
-	public Vector getWords() {
+	public static Vector getWords() {
 		Vector nameVector = new Vector();
 		ArrayList<String> names = Dictionary.getNames();
 		
@@ -184,7 +192,7 @@ public class application {
 		return nameVector;
 	}
 	
-	public ArrayList<Word> sortWordsZA(ArrayList<Word> words){
+	public static ArrayList<Word> sortWordsZA(ArrayList<Word> words){
 		
 		List<Word> tempList = words;
 		
@@ -203,7 +211,7 @@ public class application {
 		
 	}
 	
-	public ArrayList<Word> sortWordsAZ(ArrayList<Word> words){
+	public static ArrayList<Word> sortWordsAZ(ArrayList<Word> words){
 		
 		ArrayList<Word> sortedWords = sortWordsZA(words);
 		ArrayList<Word> sortedWordsZA = new ArrayList<Word>();
@@ -215,6 +223,18 @@ public class application {
 		}
 		
 		return sortedWordsZA;
+		
+	}
+	
+	public static void reloadWords(ArrayList<Word> words) {
+		ArrayList<Word> sortedWords = sortWordsAZ(words);
+		Dictionary.editJson(sortedWords);
+		Vector wordVector = getWords();
+		DefaultListModel tempModel = new DefaultListModel();
+		tempModel.addAll(wordVector);
+		list.setModel(tempModel);
+		
+		rdbtnAz.setSelected(true);
 		
 	}
 	
