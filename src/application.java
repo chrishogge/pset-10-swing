@@ -153,7 +153,9 @@ public class application {
 					indexes.add(indexArray[i]);
 				}
 				
-				Dictionary.deleteWords(indexes);
+				ArrayList<Word> temp = Dictionary.deleteWords(indexes);
+				
+				Dictionary.editJson(temp);
 				
 				sortWordsAZ(Dictionary.getWords());
 				
