@@ -19,6 +19,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -143,6 +144,21 @@ public class application {
 		textPane.setText("Welcome to the dictionary!");
 		
 		JButton btnNewButton_3 = new JButton("Delete Word");
+		btnNewButton_3.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int[] indexArray = list.getSelectedIndices();
+				ArrayList<Integer> indexes = new ArrayList<Integer>();
+				for(int i = 0; i < indexArray.length-1; i++) {
+					indexes.add(indexArray[i]);
+				}
+				
+				Dictionary.deleteWords(indexes);
+				
+				sortWordsAZ(Dictionary.getWords());
+				
+			}
+		});
 		frame.getContentPane().add(btnNewButton_3, "cell 0 0");
 		
 		JRadioButton rdbtnZa = new JRadioButton("Z-A");
