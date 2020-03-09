@@ -165,7 +165,7 @@ class Dictionary{
 	public static void editJson(ArrayList<Word> words) {
 		try {
 			
-			Gson gson = new Gson();
+			Gson gson = new GsonBuilder().setPrettyPrinting().create();;
 			
 		    Reader reader = Files.newBufferedReader(Paths.get("src/words.json"));
 		    
