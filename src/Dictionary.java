@@ -267,17 +267,21 @@ class Dictionary{
 	
 }
 
-public static String getFormattedAnts(int index) {
-	
-	ArrayList<String> ants = getAnt(getWords().get(index).getName());
-	String formattedAnts = "Antonyms: ";
-	
-	for(int i = 0; i < ants.size(); i++) {
-		formattedAnts += "\n\t- " + ants.get(i);
+	public static String getFormattedAnts(int index) {
+		
+		ArrayList<String> ants = getAnt(getWords().get(index).getName());
+		String formattedAnts = "Antonyms: ";
+		
+		for(int i = 0; i < ants.size(); i++) {
+			formattedAnts += "\n\t- " + ants.get(i);
+		}
+		
+		return formattedAnts;
+		
 	}
 	
-	return formattedAnts;
-	
-}
+	public static ArrayList<Word> deleteWords(ArrayList<Integer> indexes){
+		
+	}
 	
 }
