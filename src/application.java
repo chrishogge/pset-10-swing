@@ -149,7 +149,8 @@ public class application {
 			public void mouseClicked(MouseEvent e) {
 				int[] indexArray = list.getSelectedIndices();
 				ArrayList<Integer> indexes = new ArrayList<Integer>();
-				for(int i = 0; i < indexArray.length-1; i++) {
+				System.out.println(Arrays.toString(list.getSelectedIndices()));
+				for(int i = 0; i < indexArray.length; i++) {
 					indexes.add(indexArray[i]);
 				}
 				

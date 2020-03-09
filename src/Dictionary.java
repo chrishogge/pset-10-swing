@@ -284,7 +284,7 @@ class Dictionary{
 		ArrayList<Word> words = getWords();
 		
 		for(int i = 0; i < indexes.size(); i++) {
-			words.remove(indexes.get(i));
+			words.remove(i);
 		}
 		
 		return words;
