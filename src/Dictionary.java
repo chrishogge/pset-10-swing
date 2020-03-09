@@ -170,9 +170,7 @@ class Dictionary{
 		    Reader reader = Files.newBufferedReader(Paths.get("src/words.json"));
 		    
 		    String wordsJson = gson.toJson(words);
-		    
-		    System.out.println(wordsJson);
-		    
+		    		    
 		    FileWriter fileWriter = new FileWriter("src/words.json");
 		    
 		    fileWriter.write(wordsJson);
