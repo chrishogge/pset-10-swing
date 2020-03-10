@@ -87,15 +87,7 @@ public class application {
 		});
 		frame.getContentPane().add(btnNewButton_2, "flowx,cell 0 0");
 		
-		textField_1 = new JTextField();
-		textField_1.addKeyListener(new KeyAdapter() {
-			@Override
-			public void keyTyped(KeyEvent e) {
-			}
-		});
-		textField_1.setToolTipText("Enter Word to Search");
-		frame.getContentPane().add(textField_1, "cell 23 0 5 1,alignx center,aligny center");
-		textField_1.setColumns(10);
+		
 		
 		
 		
@@ -109,6 +101,18 @@ public class application {
 		x.addAll(getWords());
 		list.setModel(x);
 		scrollPane.setViewportView(list);
+		
+		textField_1 = new JTextField();
+		textField_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				ArrayList<Word> searchWords = Dictionary.searchDict(Dictionary.getWords(), textField_1.getText());
+				reloadWordsNoCommit(searchWords);
+			}
+		});
+		textField_1.setToolTipText("Enter Word to Search");
+		frame.getContentPane().add(textField_1, "cell 23 0 5 1,alignx center,aligny center");
+		textField_1.setColumns(10);
 		
 		
 		
@@ -189,8 +193,14 @@ public class application {
 		     public void mouseClicked(MouseEvent e) {
 		         if (e.getClickCount() == 1) {
 		             int index = list.locationToIndex(e.getPoint());
+		             String displayWord = "";
+		             if(Dictionary.getNames().get(index).equals(list.getSelectedValue().toString())) {
+		            	 displayWord = Dictionary.getNames().get(index);
+		             }else if(!(Dictionary.getNames().get(index).equals(list.getSelectedValue().toString()))) {
+		            	 index = Dictionary.getNames().indexOf(list.getSelectedValue());
+		            	 displayWord = Dictionary.getNames().get(index);
+		             }
 		             
-		             String displayWord = Dictionary.getNames().get(index);
 		             String temp = displayWord.substring(0,1).toUpperCase();
 		             displayWord = temp + displayWord.substring(1);
 		             
@@ -214,6 +224,22 @@ public class application {
 	public static Vector getWords() {
 		Vector nameVector = new Vector();
 		ArrayList<String> names = Dictionary.getNames();
+		
+		for(int i = 0; i < names.size(); i++) {
+			nameVector.add(names.get(i));
+		}
+		
+		return nameVector;
+	}
+	
+	public static Vector getWordsFromArrayList(ArrayList<Word> words) {
+		Vector nameVector = new Vector();
+			
+		ArrayList<String> names = new ArrayList<String>();
+		
+		for(int i = 0; i < words.size(); i++) {
+			names.add(words.get(i).getName());
+		}
 		
 		for(int i = 0; i < names.size(); i++) {
 			nameVector.add(names.get(i));
@@ -260,6 +286,17 @@ public class application {
 		ArrayList<Word> sortedWords = sortWordsAZ(words);
 		Dictionary.editJson(sortedWords);
 		Vector wordVector = getWords();
+		DefaultListModel tempModel = new DefaultListModel();
+		tempModel.addAll(wordVector);
+		list.setModel(tempModel);
+		
+		rdbtnAz.setSelected(true);
+		
+	}
+	
+	public static void reloadWordsNoCommit(ArrayList<Word> words) {
+		ArrayList<Word> sortedWords = sortWordsAZ(words);
+		Vector wordVector = getWordsFromArrayList(sortedWords);
 		DefaultListModel tempModel = new DefaultListModel();
 		tempModel.addAll(wordVector);
 		list.setModel(tempModel);

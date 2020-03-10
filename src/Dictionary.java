@@ -175,7 +175,8 @@ class Dictionary{
 		    for(int i = 0; i < words.size(); i++) {
 		    	tempWord = words.get(i);
 		    	
-		    	words.get(i).setName(tempWord.getName().substring(0,1) + tempWord.getName().substring(1));
+		    	words.get(i).setName(tempWord.getName().substring(0,1).toUpperCase() + tempWord.getName().substring(1));
+
 		    }
 		    
 		    
@@ -303,6 +304,23 @@ class Dictionary{
 		return words;
 	}
 	
+	public static ArrayList<Word> searchDict(ArrayList<Word> words, String input){
+		
+		ArrayList<Word> resultWords= new ArrayList<Word>();
+		
+		if(!(input.contentEquals("")) && !(input == null)) {
+			for(int i = 0; i < words.size(); i++) {
+				if(words.get(i).getName().substring(0, input.length()).contentEquals(input)) {
+					resultWords.add(words.get(i));
+				}
+			}
+		}else if((input.contentEquals("")) || ((input == null))) {
+			return words;
+		}
+		
+		return resultWords;
+		
+	}
 	
 	
 }
