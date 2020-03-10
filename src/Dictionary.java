@@ -282,9 +282,12 @@ class Dictionary{
 	
 	public static ArrayList<Word> deleteWords(ArrayList<Integer> indexes){
 		ArrayList<Word> words = getWords();
+		int offset = 0;
 		
 		for(int i = 0; i < indexes.size(); i++) {
-			words.remove(i);
+			int temp = indexes.get(i-offset);
+			words.remove(temp);
+			offset++;
 		}
 		
 		return words;
