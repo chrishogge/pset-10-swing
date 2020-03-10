@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.AbstractButton;
@@ -152,14 +153,16 @@ public class application {
 				for(int i = 0; i < indexArray.length; i++) {
 					indexes.add(indexArray[i]);
 				}
+								
+				int input = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the selected items?", "Select an Option", JOptionPane.YES_NO_OPTION);
 				
-				System.out.println(indexes);
-				
-				ArrayList<Word> temp = Dictionary.deleteWords(indexes);
-				
-				Dictionary.editJson(temp);
-				
-				reloadWords(temp);
+				if(input == 0) {
+					ArrayList<Word> temp = Dictionary.deleteWords(indexes);
+					Dictionary.editJson(temp);
+					reloadWords(temp);
+				}else if(input == 1) {
+					reloadWords(Dictionary.getWords());
+				}
 				
 			}
 		});
