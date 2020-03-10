@@ -35,6 +35,8 @@ import java.awt.CardLayout;
 import java.awt.ScrollPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.JRadioButton;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class application {
 	private JFrame frame;
@@ -86,6 +88,11 @@ public class application {
 		frame.getContentPane().add(btnNewButton_2, "flowx,cell 0 0");
 		
 		textField_1 = new JTextField();
+		textField_1.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+			}
+		});
 		textField_1.setToolTipText("Enter Word to Search");
 		frame.getContentPane().add(textField_1, "cell 23 0 5 1,alignx center,aligny center");
 		textField_1.setColumns(10);

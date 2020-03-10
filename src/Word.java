@@ -34,4 +34,8 @@ public class Word {
 		return antonyms;
 	}
 	
+	public void setName(String name) {
+		word = name; 
+	}
+	
 }

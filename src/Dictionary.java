@@ -169,6 +169,16 @@ class Dictionary{
 			
 		    Reader reader = Files.newBufferedReader(Paths.get("src/words.json"));
 		    
+		    String temp;
+		    Word tempWord;
+		    
+		    for(int i = 0; i < words.size(); i++) {
+		    	tempWord = words.get(i);
+		    	
+		    	words.get(i).setName(tempWord.getName().substring(0,1) + tempWord.getName().substring(1));
+		    }
+		    
+		    
 		    String wordsJson = gson.toJson(words);
 		    		    
 		    FileWriter fileWriter = new FileWriter("src/words.json");
@@ -292,5 +302,7 @@ class Dictionary{
 		
 		return words;
 	}
+	
+	
 	
 }
